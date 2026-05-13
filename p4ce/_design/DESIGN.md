@@ -269,11 +269,18 @@ Avoid hard drop shadows — use `border.subtle` strokes for separation.
 - Score result
 - Adapted recommendation for today
 
-### 6. Settings / Profile
-**Purpose:** Configure 1RMs, training frequency, preferences
-- Athlete profile
-- 1RM input per lift
-- Program configuration
+### 6. Settings / Profile (Athlete Profile & Settings)
+**Purpose:** Configure the athlete profile, 1RMs, training frequency, and related preferences before the programming engine can rely on percentages and weekly structure.
+
+**Jira:** Epic [P4CE-7](https://p4ce.atlassian.net/browse/P4CE-7). Design story [P4CE-8](https://p4ce.atlassian.net/browse/P4CE-8) (wireframes + SwiftData sign-off).
+
+**MVP wireframes:** [`wireframes/P4CE-8-athlete-profile-wireframe.html`](wireframes/P4CE-8-athlete-profile-wireframe.html) · IA [`wireframes/IA-P4CE-8.md`](wireframes/IA-P4CE-8.md). **Full spec:** [`specs/athlete-profile-settings-spec.md`](specs/athlete-profile-settings-spec.md).
+
+- **Entry:** Dashboard toolbar `gearshape.fill` → `NavigationStack` **push** (not a root tab; same rule as P4CE-4)
+- **First launch:** 3-step onboarding **bottom sheet** before Dashboard is usable (`onboardingCompleted` in SwiftData)
+- **Settings root:** Athlete section (name, body weight, unit toggle, frequency, experience) + **1-Rep maxes** (one row per core lift, empty `—`) + Preferences placeholders + **Reset 1RMs** destructive action (confirm alert)
+- **Per-lift 1RM:** bottom **sheet** with stepper, direct numeric input, SAVE
+- **Storage:** weights persisted in **kg** only; unit preference is display-layer (see spec §4)
 
 ---
 
