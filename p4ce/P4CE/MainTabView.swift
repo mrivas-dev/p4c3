@@ -1,13 +1,23 @@
 import SwiftUI
 
+enum MainTab: Hashable {
+    case dashboard
+    case workout
+    case strength
+    case analytics
+}
+
 /// Root tab shell — four tabs per P4CE-4 / `DESIGN.md` § Navigation (MVP).
 struct MainTabView: View {
+    @State private var selectedTab: MainTab = .dashboard
+
     var body: some View {
-        TabView {
-            DashboardView()
+        TabView(selection: $selectedTab) {
+            DashboardView(onGoToWorkout: { selectedTab = .workout })
                 .tabItem {
                     Label("Dashboard", systemImage: "house.fill")
                 }
+                .tag(MainTab.dashboard)
 
             NavigationStack {
                 WorkoutRootView()
@@ -19,6 +29,7 @@ struct MainTabView: View {
             .tabItem {
                 Label("Workout", systemImage: "bolt.fill")
             }
+            .tag(MainTab.workout)
 
             NavigationStack {
                 StrengthRootView()
@@ -30,6 +41,7 @@ struct MainTabView: View {
             .tabItem {
                 Label("Strength", systemImage: "figure.strengthtraining.traditional")
             }
+            .tag(MainTab.strength)
 
             NavigationStack {
                 AnalyticsRootView()
@@ -41,6 +53,7 @@ struct MainTabView: View {
             .tabItem {
                 Label("Analytics", systemImage: "chart.line.uptrend.xyaxis")
             }
+            .tag(MainTab.analytics)
         }
         .tint(Color.P4CE.lime)
     }
