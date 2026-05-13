@@ -3,9 +3,14 @@ import SwiftUI
 /// Home / Dashboard — layout aligned with `_design/wireframes/P4CE-4-dashboard-wireframe.html`.
 struct DashboardView: View {
     private let viewModel: DashboardViewModel
+    private let onGoToWorkout: () -> Void
 
-    init(viewModel: DashboardViewModel = DashboardViewModel()) {
+    init(
+        viewModel: DashboardViewModel = DashboardViewModel(),
+        onGoToWorkout: @escaping () -> Void = {}
+    ) {
         self.viewModel = viewModel
+        self.onGoToWorkout = onGoToWorkout
     }
 
     var body: some View {
@@ -13,33 +18,38 @@ struct DashboardView: View {
             VStack(spacing: 0) {
                 ScrollView {
                     VStack(alignment: .leading, spacing: AppSpacing.space6.value) {
-                        MetricCard {
-                            VStack(alignment: .leading, spacing: AppSpacing.space3.value) {
-                                SectionHeader(title: "Today")
-                                Text(viewModel.workoutHeadline)
-                                    .font(Font.appSans(size: 22, weight: .bold))
-                                    .tracking(Font.Tracking.sectionDate)
-                                    .foregroundStyle(Color.P4CE.text)
-                                Text(viewModel.workoutDetail)
-                                    .font(Font.Style.sessionName)
-                                    .foregroundStyle(Color.P4CE.textDim)
+                        Button(action: onGoToWorkout) {
+                            MetricCard {
+                                VStack(alignment: .leading, spacing: AppSpacing.space3.value) {
+                                    SectionHeader(title: "Today")
+                                    Text(viewModel.workoutHeadline)
+                                        .font(Font.appSans(size: 22, weight: .bold))
+                                        .tracking(Font.Tracking.sectionDate)
+                                        .foregroundStyle(Color.P4CE.text)
+                                    Text(viewModel.workoutDetail)
+                                        .font(Font.Style.sessionName)
+                                        .foregroundStyle(Color.P4CE.textDim)
 
-                                LazyVGrid(
-                                    columns: [GridItem(.flexible()), GridItem(.flexible())],
-                                    spacing: AppSpacing.space2.value
-                                ) {
-                                    DashboardMetricTile(
-                                        label: viewModel.lastSessionLabel,
-                                        value: viewModel.lastSessionValue
-                                    )
-                                    DashboardMetricTile(
-                                        label: viewModel.weeklyVolumeLabel,
-                                        value: viewModel.weeklyVolumeValue
-                                    )
+                                    LazyVGrid(
+                                        columns: [GridItem(.flexible()), GridItem(.flexible())],
+                                        spacing: AppSpacing.space2.value
+                                    ) {
+                                        DashboardMetricTile(
+                                            label: viewModel.lastSessionLabel,
+                                            value: viewModel.lastSessionValue
+                                        )
+                                        DashboardMetricTile(
+                                            label: viewModel.weeklyVolumeLabel,
+                                            value: viewModel.weeklyVolumeValue
+                                        )
+                                    }
+                                    .padding(.top, AppSpacing.space2.value)
                                 }
-                                .padding(.top, AppSpacing.space2.value)
                             }
                         }
+                        .buttonStyle(.plain)
+                        .accessibilityLabel("Today's workout")
+                        .accessibilityHint("Opens the Workout tab")
                     }
                     .padding(.horizontal, AppSpacing.space4.value)
                     .padding(.top, AppSpacing.space2.value)
@@ -70,7 +80,7 @@ struct DashboardView: View {
     }
 
     private func startWorkoutTapped() {
-        // Hook for Workout tab / session flow (future).
+        onGoToWorkout()
     }
 }
 
