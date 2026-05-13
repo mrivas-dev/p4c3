@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>P4CE-4 — Dashboard (Home) wireframe</title>
+  <style>
+    :root {
+      --bg: #121418;
+      --surf: #1c2026;
+      --line: #363d47;
+      --text: #f7f7f0;
+      --muted: #6b7280;
+      --lime: #d4f53c;
+      --thumb: rgba(212, 245, 60, 0.12);
+      --annot: #f0c040;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: #0a0c0f;
+      color: var(--text);
+      font-family: ui-sans-serif, system-ui, sans-serif;
+      font-size: 13px;
+      line-height: 1.4;
+      padding: 24px;
+    }
+    h1 {
+      font-size: 15px;
+      font-weight: 600;
+      margin: 0 0 8px;
+      letter-spacing: 0.02em;
+    }
+    .meta { color: var(--muted); margin-bottom: 20px; max-width: 52rem; }
+    .frame-wrap {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 24px;
+      align-items: flex-start;
+    }
+    .phone {
+      width: 320px;
+      height: 692px;
+      background: var(--bg);
+      border-radius: 36px;
+      border: 2px solid var(--line);
+      padding: 14px 12px 10px;
+      position: relative;
+      overflow: hidden;
+    }
+    .notch {
+      position: absolute;
+      top: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 96px;
+      height: 28px;
+      background: #000;
+      border-radius: 20px;
+      z-index: 2;
+    }
+    .screen {
+      margin-top: 36px;
+      height: calc(100% - 36px - 76px);
+      display: flex;
+      flex-direction: column;
+      padding: 0 12px;
+      overflow: hidden;
+    }
+    .annot-strip {
+      flex: 1;
+      border: 2px dashed var(--annot);
+      background: rgba(240, 192, 64, 0.06);
+      border-radius: 8px;
+      padding: 8px 10px;
+      margin-bottom: 10px;
+    }
+    .annot-strip .tag {
+      display: inline-block;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      color: var(--annot);
+      margin-bottom: 6px;
+    }
+    .lofi {
+      background: var(--surf);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 14px;
+    }
+    .lofi h2 {
+      margin: 0 0 4px;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--muted);
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+    .lofi .title {
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      margin-bottom: 4px;
+    }
+    .lofi .sub {
+      font-size: 12px;
+      color: var(--muted);
+      margin-bottom: 12px;
+    }
+    .metrics {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+    .metric {
+      background: rgba(0,0,0,0.2);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 10px;
+    }
+    .metric .k { font-size: 9px; color: var(--muted); letter-spacing: 0.12em; text-transform: uppercase; }
+    .metric .v { font-size: 18px; font-weight: 700; margin-top: 4px; }
+    .thumb-zone {
+      border: 2px solid var(--lime);
+      background: var(--thumb);
+      border-radius: 12px;
+      padding: 12px;
+      margin-top: auto;
+      margin-bottom: 8px;
+    }
+    .thumb-zone .tag { color: var(--lime); }
+    .cta {
+      width: 100%;
+      height: 56px;
+      border: none;
+      border-radius: 14px;
+      background: var(--lime);
+      color: #1a2605;
+      font-size: 14px;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      cursor: default;
+    }
+    .tabbar {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 76px;
+      background: var(--surf);
+      border-top: 1px solid var(--line);
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-around;
+      padding-top: 10px;
+      padding-bottom: 20px;
+    }
+    .tab {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      font-size: 9px;
+      color: var(--muted);
+      min-width: 56px;
+    }
+    .tab.on { color: var(--lime); font-weight: 700; }
+    .tab svg { opacity: 0.9; }
+    .legend {
+      max-width: 28rem;
+    }
+    .legend h2 { font-size: 13px; margin: 0 0 10px; }
+    .legend ul { margin: 0; padding-left: 18px; color: var(--muted); }
+    .legend li { margin-bottom: 8px; }
+    .legend strong { color: var(--text); }
+  </style>
+</head>
+<body>
+  <h1>P4CE-4 — Dashboard (Home) lo-fi wireframe</h1>
+  <p class="meta">
+    Annotated layout for Jira <strong>P4CE-4</strong>. Open this file in a browser. Companion: <code>_design/wireframes/IA-P4CE-4.md</code>.
+    Safe area: tab bar reserves bottom inset; primary CTA sits above thumb zone band.
+  </p>
+  <div class="frame-wrap">
+    <div class="phone" aria-label="Phone wireframe">
+      <div class="notch" aria-hidden="true"></div>
+      <div class="screen">
+        <div class="annot-strip" title="Scrollable if content grows; keep CTA pinned above tab bar in implementation">
+          <span class="tag">ABOVE thumb zone — secondary scan</span>
+          <div class="lofi">
+            <h2>Today</h2>
+            <div class="title">Back squat — strength</div>
+            <div class="sub">5 × 5 @ 82% · est. time 35m</div>
+            <div class="metrics">
+              <div class="metric">
+                <div class="k">Last session</div>
+                <div class="v">Mon · Vol 12.4t</div>
+              </div>
+              <div class="metric">
+                <div class="k">Week volume</div>
+                <div class="v">38.2t</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="thumb-zone">
+          <span class="tag">THUMB ZONE — primary action (full width ≥56pt height)</span>
+          <button type="button" class="cta" disabled>START WORKOUT</button>
+        </div>
+      </div>
+      <nav class="tabbar" aria-label="Bottom navigation MVP">
+        <div class="tab on">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+            <path d="M4 11.5L12 5l8 6.5V20a1 1 0 01-1 1h-5v-6h-4v6H5a1 1 0 01-1-1v-8.5z"/>
+          </svg>
+          <span>Dashboard</span>
+        </div>
+        <div class="tab">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+            <path d="M13 2L3 14h8l-1 8 10-12h-8l1-8z"/>
+          </svg>
+          <span>Workout</span>
+        </div>
+        <div class="tab">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" opacity="0.85">
+            <path d="M12 2c-2 4-6 6-6 10a6 6 0 1012 0c0-4-4-6-6-10z"/>
+          </svg>
+          <span>Strength</span>
+        </div>
+        <div class="tab">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
+            <path d="M5 19V11M10 19V5M15 19v-6M20 19v-9" stroke-linecap="round"/>
+          </svg>
+          <span>Analytics</span>
+        </div>
+      </nav>
+    </div>
+    <aside class="legend">
+      <h2>Acceptance criteria coverage</h2>
+      <ul>
+        <li><strong>Today’s planned workout card:</strong> hero title, format, load prescription, time hint.</li>
+        <li><strong>Key metrics snapshot:</strong> last session (day + volume or summary) + weekly volume.</li>
+        <li><strong>Quick-start CTA:</strong> single primary control, lime accent, placed in lower thumb band.</li>
+        <li><strong>Bottom nav:</strong> four tabs per P4CE-4; Dashboard selected.</li>
+        <li><strong>One-handed:</strong> dashed gold region = scan; green outline = committed thumb reach for CTA.</li>
+        <li><strong>No decorative UI:</strong> no imagery or motion in wireframe—only labeled blocks.</li>
+      </ul>
+    </aside>
+  </div>
+</body>
+</html>

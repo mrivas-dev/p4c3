@@ -230,9 +230,16 @@ Avoid hard drop shadows — use `border.subtle` strokes for separation.
 
 ### 1. Dashboard (Home)
 **Purpose:** "What do I do today?"
-- Today's workout card (main lift, sets, load)
-- Readiness score ring
-- Quick-log CTA
+
+**MVP layout (P4CE-4):** Reference wireframe [`wireframes/P4CE-4-dashboard-wireframe.html`](wireframes/P4CE-4-dashboard-wireframe.html) and IA [`wireframes/IA-P4CE-4.md`](wireframes/IA-P4CE-4.md). **SwiftUI shell:** `DashboardView` + `MainTabView` in the app target (story P4CE-6).
+
+- Today's planned workout card (main session identity, prescription, scannable in seconds)
+- Key metrics snapshot: **last session** + **weekly volume**
+- Quick-start CTA (full width, thumb zone — see wireframe)
+- Settings / profile: **not** a root tab in MVP; use toolbar or header affordance on Dashboard (e.g. `gearshape`)
+
+**Phase 2 (out of P4CE-4 wireframe scope unless a later story pulls them in):**
+- Readiness score ring on home
 - Recent PRs strip
 
 ### 2. Active Session
@@ -272,19 +279,21 @@ Avoid hard drop shadows — use `border.subtle` strokes for separation.
 
 ## Navigation Structure
 
+**MVP (P4CE-4 / Jira):** four bottom tabs. Prototype [`screens/Home Dashboard.jsx`](screens/Home%20Dashboard.jsx) used *Home / Log / Program / Analytics*; repo naming aligns with Jira as below (details: [`wireframes/IA-P4CE-4.md`](wireframes/IA-P4CE-4.md)).
+
 ```
 TabBar (bottom)
-├── Dashboard       — House icon
-├── Today           — Lightning bolt icon  (active session)
-├── Program         — Calendar icon
-├── Analytics       — Chart icon
-└── Settings        — Gear icon
+├── Dashboard   — SF Symbol: house.fill
+├── Workout     — bolt.fill (session / logging entry; maps to JSX "Log")
+├── Strength    — figure.strengthtraining.traditional or calendar.badge.clock (maps to JSX "Program")
+└── Analytics   — chart.line.uptrend.xyaxis
 ```
 
 - Tab bar background: `bg.secondary` with `border.subtle` top stroke
 - Active icon tint: `accent.primary`
 - Inactive icon tint: `text.tertiary`
-- No labels (icons only for clean look, or icons + short labels)
+- Labels optional: short text under icons is acceptable for MVP clarity (wireframe shows labels)
+- **Settings** is not a tab in MVP; access from Dashboard navigation affordance
 
 ---
 
