@@ -154,3 +154,19 @@ Apps:
 
 Desired feeling:
 “minimal training notebook for serious athletes”
+
+---
+
+# Xcode / Simulator
+
+Primary simulator for local builds and Previews alignment: **iPhone 17 Pro** (logical **402 × 874** pt; see `_design/tokens/tokens.json` → `screens.phone`).
+
+Example:
+
+```bash
+cd p4ce/p4ce && xcodegen generate && xcodebuild -scheme P4CE \
+  -destination 'platform=iOS Simulator,name=iPhone 17 Pro' \
+  -configuration Debug build
+```
+
+Use the exact simulator name/OS from Xcode’s Devices list (`xcrun simctl list devices`) if `-destination` does not resolve.

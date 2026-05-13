@@ -357,3 +357,9 @@ Button("Log Set") { ... }
 ```
 
 > Define all color tokens in `Assets.xcassets` with dark/light variants (dark is the primary, light is optional).
+
+---
+
+## Simulator reference
+
+**Default Xcode destination** for layout checks: **iPhone 17 Pro**. `_design/tokens/tokens.json` → `screens.phone` matches **402 × 874** pt logical (same class as iPhone 17 Pro in current Xcode simulator runtimes).
