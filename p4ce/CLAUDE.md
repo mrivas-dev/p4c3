@@ -170,3 +170,5 @@ cd p4ce/p4ce && xcodegen generate && xcodebuild -scheme P4CE \
 ```
 
 Use the exact simulator name/OS from Xcode’s Devices list (`xcrun simctl list devices`) if `-destination` does not resolve.
+
+URL for jira project: https://p4ce.atlassian.net/jira/software/projects/P4CE/boards/1

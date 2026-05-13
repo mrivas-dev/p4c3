@@ -1,0 +1,51 @@
+---
+description: Core project context — always applied in every file and chat session
+alwaysApply: true
+---
+
+# P4CE — iOS CrossFit Training App
+
+## What this project is
+An iOS-first training tracker for CrossFit and hybrid athletes. The primary value is an adaptive programming engine, not pretty UI. Users are mid-workout and exhausted — every interaction must be instant.
+
+## Tech stack
+- SwiftUI + SwiftData (no backend, offline-first)
+- Swift Charts for analytics
+- MVVM architecture
+- XCTest + Swift Testing
+- Swift 6.0, iOS 17+ deployment target
+- XcodeGen (`project.yml`) — regenerate with `xcodegen generate` after adding files/targets
+
+## Primary simulator
+iPhone 17 Pro (logical 402 × 874 pt)
+
+```bash
+cd p4ce/p4ce && xcodegen generate && xcodebuild \
+  -scheme P4CE \
+  -destination 'platform=iOS Simulator,name=iPhone 17 Pro' \
+  -configuration Debug build
+```
+
+## Feature folders
+```
+P4CE/Features/
+├── Dashboard
+├── Workout
+├── Strength
+├── Readiness
+├── Analytics
+└── Settings
+
+P4CE/Core/
+├── Models
+├── Services
+├── Persistence
+├── Algorithms
+└── UI
+```
+
+## Core lifts
+Snatch · Clean & Jerk · Back Squat · Front Squat · Deadlift · Bench Press
+
+## Jira board
+https://p4ce.atlassian.net/jira/software/projects/P4CE/boards/1

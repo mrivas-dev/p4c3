@@ -1,0 +1,36 @@
+---
+description: Testing strategy and conventions for P4CE
+globs: ["**/*Test*.swift", "**/*Spec*.swift", "**/Tests/**"]
+alwaysApply: false
+---
+
+# Testing Strategy
+
+## Priority order
+1. **Progression calculations** — percentage math, 1RM estimation
+2. **Fatigue scoring** — daily readiness, fatigue accumulation
+3. **Deload trigger logic** — thresholds, block transitions
+4. **Workout generation** — set/rep/weight calculation from training plan
+5. **PR detection** — volume PRs, intensity PRs
+6. **UI tests** — lowest priority; only for critical happy paths
+
+## Tools
+- `XCTest` for unit tests
+- `Swift Testing` (`@Test`, `@Suite`) for new test files
+- No third-party test frameworks
+
+## Principles
+- All training algorithm functions must be pure (no side effects, no SwiftData dependency)
+- Test at the function level, not the ViewModel level where possible
+- Aim for deterministic tests — seed random where needed
+- Test edge cases: zero reps, bodyweight lifts, deload weeks, RPE 10
+
+## File naming
+- Unit tests: `<TypeName>Tests.swift`
+- Integration tests: `<Feature>IntegrationTests.swift`
+- Place alongside source in feature folders or in a parallel `Tests/` group
+
+## What NOT to test
+- SwiftUI view layout (fragile, high maintenance)
+- SwiftData persistence internals
+- UI animations or transitions

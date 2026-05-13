@@ -1,0 +1,70 @@
+---
+description: Design tokens, color palette, typography, and UX rules for P4CE
+globs: ["**/*.swift", "_design/**"]
+alwaysApply: false
+---
+
+# P4CE Design System
+
+Source of truth: `_design/tokens/tokens.json`
+
+## Product principles
+- Fast over flashy
+- Minimal UI, dark mode first
+- One-handed interaction
+- Zero spreadsheet feeling, minimal typing
+- Instant interactions — no skeleton screens, no loading walls
+
+## Color palette (dark mode only)
+
+| Token      | Hex       | Usage |
+|------------|-----------|-------|
+| `bg`       | `#121418` | Main app background |
+| `bgDeep`   | `#0C0F13` | Tab bar, deepest background |
+| `surf`     | `#1C2026` | Cards, stat tiles, hero cards |
+| `surfHi`   | `#252B33` | Elevated elements, date badges |
+| `line`     | `#363D47` | Borders, dividers, inactive bars |
+| `lineSoft` | `#272E38` | Subtle separators |
+| `text`     | `#F7F7F0` | Primary text, headings, values |
+| `textDim`  | `#C4C4B8` | Secondary text, supporting info |
+| `muted`    | `#6B7280` | Metadata caps, timestamps |
+| `dim`      | `#3F4550` | Inactive tab icons, de-emphasized |
+| `lime`     | `#D4F53C` | **PRIMARY ACCENT** — CTA, PRs, highlights |
+| `limeDeep` | `#9EBF1A` | Pressed / active state of lime |
+| `limeInk`  | `#1A2605` | Text / icons ON lime background |
+| `red`      | `#E05A3A` | Danger, pain flags, low readiness |
+| `amber`    | `#F0C040` | Warning, medium readiness (5–6/10) |
+| `green`    | `#5DBF78` | Success, high readiness label |
+
+## Typography
+
+| Role          | Font           | Size      | Weight | Notes |
+|---------------|----------------|-----------|--------|-------|
+| `heroWorkout` | Antonio        | 68–76 pt  | 700    | Tracking −1.4 to −1.6 |
+| `heroSub`     | Antonio        | 18–22 pt  | 500    | Tracking +0.4 |
+| `statsLarge`  | Antonio        | 24–30 pt  | 600–700| Tracking −0.5 |
+| `ctaLabel`    | Antonio        | 26–30 pt  | 700    | Tracking +1.5 |
+| `sectionDate` | Geist          | 14–22 pt  | 500–600| Tracking −0.3 |
+| `sessionName` | Geist          | 13–16 pt  | 500    | |
+| `metadataCaps`| JetBrains Mono | 9–11 pt   | 500–600| UPPERCASE, tracking +1.3–1.6 |
+| `tagLabel`    | JetBrains Mono | 10 pt     | 500    | UPPERCASE, tracking +1.6 |
+
+- Display font (Antonio) → hero numbers, workout names, CTAs, big stats
+- Body font (Geist) → labels, session names, body text
+- Mono font (JetBrains Mono) → metadata CAPS, dates, tags
+
+## Spacing scale (pt)
+4 · 8 · 12 · 16 · 20 · 24 · 32 · 40 · 48 · 64
+
+## Corner radius
+`sm` 8 · `md` 12 · `lg` 16 · `xl` 20 · `2xl` 22 (hero cards) · `3xl` 24 (full-bleed CTA) · `full` 999
+
+## Canvas
+- Screen: 402 × 874 pt (iPhone 17 Pro logical)
+- Safe area: top 59 pt, bottom 34 pt
+- Content width: 362 pt (16 pt side padding each side)
+- Tab bar height: 83 pt
+
+## Design inspiration
+Strong · Hevy · TrainHeroic · Athlytic
+Desired feeling: **"minimal training notebook for serious athletes"**

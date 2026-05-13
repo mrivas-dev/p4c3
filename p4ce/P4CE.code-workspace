@@ -1,0 +1,110 @@
+{
+  "folders": [
+    {
+      "name": "P4CE",
+      "path": "."
+    }
+  ],
+  "settings": {
+    "editor.tabSize": 4,
+    "editor.insertSpaces": true,
+    "editor.formatOnSave": true,
+    "editor.rulers": [120],
+    "editor.trimAutoWhitespace": true,
+    "files.trimTrailingWhitespace": true,
+    "files.insertFinalNewline": true,
+    "files.exclude": {
+      "**/.DS_Store": true,
+      "**/DerivedData": true,
+      "**/*.xcuserstate": true,
+      "**/.build": true
+    },
+    "search.exclude": {
+      "**/DerivedData": true,
+      "**/.build": true,
+      "**/*.xcodeproj": true
+    },
+    "[swift]": {
+      "editor.defaultFormatter": "vknabel.vscode-apple-swift-format",
+      "editor.tabSize": 4
+    },
+    "swift.path": "/usr/bin/swift",
+    "swift.buildArguments": [],
+    "cursor.chat.defaultModel": "claude-sonnet-4-5"
+  },
+  "extensions": {
+    "recommendations": [
+      "sswg.swift-lang",
+      "vknabel.vscode-apple-swift-format",
+      "aaron-bond.better-comments",
+      "usernamehw.errorlens",
+      "eamodio.gitlens"
+    ]
+  },
+  "launch": {
+    "configurations": [
+      {
+        "name": "Build — iPhone 17 Pro",
+        "type": "lldb",
+        "request": "launch",
+        "program": "${workspaceFolder}/P4CE",
+        "preLaunchTask": "xcodebuild"
+      }
+    ]
+  },
+  "tasks": {
+    "version": "2.0.0",
+    "tasks": [
+      {
+        "label": "xcodegen",
+        "type": "shell",
+        "command": "cd ${workspaceFolder} && xcodegen generate",
+        "group": "build",
+        "presentation": {
+          "reveal": "always",
+          "panel": "shared"
+        },
+        "problemMatcher": []
+      },
+      {
+        "label": "xcodebuild — Debug",
+        "type": "shell",
+        "command": "cd ${workspaceFolder} && xcodebuild -scheme P4CE -destination 'platform=iOS Simulator,name=iPhone 17 Pro' -configuration Debug build",
+        "group": {
+          "kind": "build",
+          "isDefault": true
+        },
+        "presentation": {
+          "reveal": "always",
+          "panel": "shared"
+        },
+        "problemMatcher": ["$xcode"]
+      },
+      {
+        "label": "xcodebuild — Test",
+        "type": "shell",
+        "command": "cd ${workspaceFolder} && xcodebuild test -scheme P4CE -destination 'platform=iOS Simulator,name=iPhone 17 Pro'",
+        "group": {
+          "kind": "test",
+          "isDefault": true
+        },
+        "presentation": {
+          "reveal": "always",
+          "panel": "shared"
+        },
+        "problemMatcher": ["$xcode"]
+      },
+      {
+        "label": "regen + build",
+        "type": "shell",
+        "command": "cd ${workspaceFolder} && xcodegen generate && xcodebuild -scheme P4CE -destination 'platform=iOS Simulator,name=iPhone 17 Pro' -configuration Debug build",
+        "group": "build",
+        "presentation": {
+          "reveal": "always",
+          "panel": "shared"
+        },
+        "problemMatcher": ["$xcode"]
+      }
+    ]
+  }
+}
