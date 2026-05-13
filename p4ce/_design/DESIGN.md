@@ -17,70 +17,109 @@
 
 ## Color Palette
 
-### Backgrounds
+> Colors use the **OKLCH** color space — perceptually uniform, great for dark UIs.
+> Source of truth: extracted from `screens/Home Dashboard.jsx` (T token object).
 
-| Token              | Hex       | Usage                                   |
-|--------------------|-----------|-----------------------------------------|
-| `bg.primary`       | `#0A0A0A` | Main app background                     |
-| `bg.secondary`     | `#141414` | Cards, bottom sheets, elevated surfaces |
-| `bg.tertiary`      | `#1E1E1E` | Input fields, secondary cards           |
-| `bg.overlay`       | `#000000CC` | Modal overlays (80% opacity)           |
+### Core Tokens (from design file)
 
-### Text
+```js
+const T = {
+  bg:        'oklch(0.155 0.005 250)',  // main background
+  bgDeep:    'oklch(0.12  0.005 250)',  // deepest bg (tab bar brutal variant)
+  surf:      'oklch(0.205 0.006 250)',  // cards, surfaces
+  surfHi:    'oklch(0.245 0.006 250)',  // elevated / highlighted surface
+  line:      'oklch(0.27  0.005 250)',  // borders, dividers
+  lineSoft:  'oklch(0.225 0.005 250)',  // subtle separators
+  text:      'oklch(0.97  0.005 90)',   // primary text
+  textDim:   'oklch(0.80  0.005 90)',   // secondary text
+  muted:     'oklch(0.55  0.010 250)',  // metadata, labels
+  dim:       'oklch(0.40  0.010 250)',  // disabled / de-emphasized
+  lime:      'oklch(0.86  0.20 124)',   // accent — CTA, PRs, highlights
+  limeDeep:  'oklch(0.70  0.18 124)',   // pressed/active accent
+  limeInk:   'oklch(0.18  0.05 124)',   // text ON lime buttons
+  red:       'oklch(0.70  0.18 25)',    // danger / pain flags
+  amber:     'oklch(0.82  0.16 78)',    // warning / medium readiness
+  green:     'oklch(0.78  0.16 145)',   // success / high readiness
+}
+```
 
-| Token              | Hex       | Usage                                   |
-|--------------------|-----------|-----------------------------------------|
-| `text.primary`     | `#F5F5F5` | Headings, primary labels                |
-| `text.secondary`   | `#A0A0A0` | Subtitles, supporting info              |
-| `text.tertiary`    | `#606060` | Disabled states, placeholders           |
-| `text.inverse`     | `#0A0A0A` | Text on accent buttons                  |
+### Semantic Usage
 
-### Accent
+| Token       | Usage                                              |
+|-------------|----------------------------------------------------|
+| `bg`        | Main app background                                |
+| `bgDeep`    | Deepest layer (nav bar background)                 |
+| `surf`      | Cards, hero cards, stat tiles, session rows        |
+| `surfHi`    | Date badges, nested elevated elements              |
+| `line`      | Borders, grid lines, inactive readiness bars       |
+| `lineSoft`  | Subtle dividers, section separators                |
+| `text`      | Primary labels, headings, values                   |
+| `textDim`   | Secondary labels, supporting info                  |
+| `muted`     | Metadata captions, monospace tags (VOLUME, STREAK) |
+| `dim`       | Inactive tab icons, separators                     |
+| `lime`      | **Primary accent** — CTAs, PR values, active tags  |
+| `limeDeep`  | Pressed state of lime buttons                      |
+| `limeInk`   | Text/icons that sit ON lime background             |
+| `red`       | Fatigue danger, pain flags, low readiness          |
+| `amber`     | Medium readiness (5–6/10)                          |
+| `green`     | High readiness labels ("PRIMED")                   |
 
-| Token              | Hex       | Usage                                   |
-|--------------------|-----------|-----------------------------------------|
-| `accent.primary`   | `#E8FF47` | CTAs, progress indicators, highlights  |
-| `accent.secondary` | `#C8E000` | Pressed/active state of accent          |
-| `accent.muted`     | `#E8FF4726` | Accent tint (15% opacity)             |
+### SwiftUI OKLCH Note
 
-### Semantic
+SwiftUI does not natively support OKLCH syntax yet. Use `Color(hue:saturation:brightness:)` or convert to sRGB hex for `Assets.xcassets`. Approximate hex equivalents:
 
-| Token              | Hex       | Usage                                   |
-|--------------------|-----------|-----------------------------------------|
-| `semantic.success` | `#4ADE80` | PR badges, completed sets               |
-| `semantic.warning` | `#FACC15` | High fatigue warnings                   |
-| `semantic.danger`  | `#F87171` | Pain/discomfort flags, missed sessions  |
-| `semantic.info`    | `#60A5FA` | Informational tags, RPE neutral         |
-
-### Borders & Separators
-
-| Token              | Hex       | Usage                                   |
-|--------------------|-----------|-----------------------------------------|
-| `border.subtle`    | `#FFFFFF10` | Card borders, dividers                 |
-| `border.default`   | `#FFFFFF20` | Input fields, active separators        |
-| `border.focus`     | `#E8FF4766` | Focused input ring                     |
+| Token      | Approx Hex  |
+|------------|-------------|
+| `bg`       | `#121418`   |
+| `surf`     | `#1C2026`   |
+| `surfHi`   | `#252B33`   |
+| `line`     | `#363D47`   |
+| `lineSoft` | `#272E38`   |
+| `text`     | `#F7F7F0`   |
+| `textDim`  | `#C4C4B8`   |
+| `muted`    | `#6B7280`   |
+| `dim`      | `#3F4550`   |
+| `lime`     | `#D4F53C`   |
+| `limeDeep` | `#9EBF1A`   |
+| `limeInk`  | `#1A2605`   |
+| `red`      | `#E05A3A`   |
+| `amber`    | `#F0C040`   |
+| `green`    | `#5DBF78`   |
 
 ---
 
 ## Typography
 
-Font: **SF Pro** (system default on iOS)
+Three font families — extracted from design file:
 
-| Token              | Size  | Weight       | Line Height | Usage                         |
-|--------------------|-------|--------------|-------------|-------------------------------|
-| `type.display`     | 34pt  | Bold (700)   | 41pt        | Hero numbers (1RM, load)      |
-| `type.title1`      | 28pt  | Bold (700)   | 34pt        | Screen titles                 |
-| `type.title2`      | 22pt  | Semibold (600) | 28pt      | Section headers               |
-| `type.title3`      | 20pt  | Semibold (600) | 25pt      | Card titles                   |
-| `type.headline`    | 17pt  | Semibold (600) | 22pt      | List row primary labels       |
-| `type.body`        | 17pt  | Regular (400)  | 22pt      | Body copy                     |
-| `type.callout`     | 16pt  | Regular (400)  | 21pt      | Supporting body               |
-| `type.subheadline` | 15pt  | Regular (400)  | 20pt      | Metadata, secondary info      |
-| `type.footnote`    | 13pt  | Regular (400)  | 18pt      | Labels, captions              |
-| `type.caption`     | 12pt  | Regular (400)  | 16pt      | Micro labels, badges          |
-| `type.mono`        | 17pt  | Regular (400)  | 22pt      | Weights, percentages (tabular)|
+```js
+const fontSans    = '"Geist", -apple-system, system-ui, sans-serif';
+const fontDisplay = '"Antonio", "Geist", system-ui, sans-serif';
+const fontMono    = '"JetBrains Mono", ui-monospace, monospace';
+```
 
-> Use `type.mono` for all numeric workout data (weights, reps, percentages) to prevent layout jitter as values change.
+| Role          | Font          | Usage                                                  |
+|---------------|---------------|--------------------------------------------------------|
+| `fontDisplay` | **Antonio**   | Hero workout names, large numbers, CTA labels, stats   |
+| `fontSans`    | **Geist**     | Body text, secondary labels, greeting, session names   |
+| `fontMono`    | **JetBrains Mono** | ALL metadata tags (VOLUME, STREAK, LAST · MON), dates, PRE labels, letter-spaced caps |
+
+### iOS Implementation Note
+
+Antonio and Geist are not system fonts — register them as custom fonts in the Xcode project (`Info.plist` → `UIAppFonts`). For monospace numerics, `JetBrains Mono` can be replaced with `.monospacedDigit()` modifier on SF Pro where custom font loading is impractical.
+
+### Key Sizing Patterns (from design)
+
+| Element                     | Font          | Size  | Weight | Letter Spacing |
+|-----------------------------|---------------|-------|--------|----------------|
+| Workout name hero           | Antonio       | 68–76pt | 700  | -1.4 to -1.6   |
+| Sub-label (21–15–9)         | Antonio       | 18–22pt | 500  | +0.4           |
+| Stats large number          | Antonio       | 24–30pt | 600–700 | -0.5         |
+| CTA button label            | Antonio       | 26–30pt | 700  | +1.5           |
+| Section date / greeting     | Geist         | 14–22pt | 500–600 | -0.3          |
+| Session name                | Geist         | 13–16pt | 500  | 0              |
+| Metadata caps (VOLUME etc.) | JetBrains Mono | 9–11pt | 500–600 | +1.3 to +1.6 |
+| Tag labels (TODAY, METCON)  | JetBrains Mono | 10pt  | 500  | +1.6           |
 
 ---
 
