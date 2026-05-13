@@ -1,0 +1,57 @@
+---
+description: Swift, SwiftUI, and SwiftData coding patterns for P4CE
+globs: ["**/*.swift"]
+alwaysApply: false
+---
+
+# Swift / SwiftUI / SwiftData Patterns
+
+## Architecture rules
+- MVVM — keep business logic OUT of Views
+- ViewModels are `@Observable` classes (Swift 5.9+ macro, not `ObservableObject`)
+- Use pure functions for all training algorithms — no side effects, easy to unit test
+- Keep files small and focused; one type per file as a default
+- Avoid massive ViewModels — split by responsibility
+
+## SwiftUI conventions
+- Prefer simple SwiftUI over custom abstractions
+- No premature optimization
+- Large touch targets (minimum 44 × 44 pt, prefer 56 pt for primary actions)
+- Bottom sheets over full-screen navigation flows
+- No modal spam — every presented sheet must have a clear dismiss path
+- Logging a set must take < 3 taps / < 3 seconds end-to-end
+- Never block UI with a loading spinner unless unavoidable
+
+## SwiftData
+- `@Model` classes live in `Core/Models/`
+- Use `@Query` in Views for reactive data binding
+- Autosave enabled; never require an explicit "Save" button
+- Preserve unfinished sessions across app restarts
+- No network dependency at the persistence layer
+
+## Training engine (Core/Algorithms/)
+- Percentage-based progression
+- RPE tracking
+- Fatigue scoring + deload triggers
+- Progression blocks
+- All logic is pure Swift functions with no UIKit/SwiftUI imports
+- This is the most critical layer — unit-test everything here
+
+## Testing priorities (highest → lowest)
+1. Progression calculations
+2. Fatigue scoring
+3. Percentage math
+4. Deload trigger logic
+5. Workout generation
+6. UI tests (lowest priority)
+
+## Swift 6 concurrency
+- Prefer `@MainActor` on ViewModels
+- Use `async/await` for any deferred work
+- Avoid global mutable state; pass dependencies explicitly
+
+## Naming
+- Models: noun, singular (`WorkoutSession`, `LiftSet`)
+- ViewModels: `<Feature>ViewModel`
+- Services: `<Domain>Service`
+- Views: `<Feature>View` or `<Feature>Screen`
