@@ -1,0 +1,13 @@
+---
+description: "DEPRECATED alias — use @ios-delivery-orchestrator + specialist rules"
+alwaysApply: false
+---
+
+# iOS delivery playbook (redirect)
+
+This rule is a **compatibility stub**. Use the split playbook instead:
+
+1. **Orchestrator:** `@ios-delivery-orchestrator` — Tech Lead, gates, DoD, full response template, summon order.  
+2. **Specialists (in pipeline order):** `@ios-delivery-swiftui-engineer` → `@ios-delivery-test-engineer` → `@ios-delivery-qa-validator` → `@ios-delivery-pr-reviewer` → `@ios-delivery-git-release-manager` → `@ios-delivery-jira-product-ops`.
+
+Full content lives in those files under `.cursor/rules/`. **Re-attach `@ios-delivery-orchestrator`** (and the specialist you need) to continue.
