@@ -11,7 +11,8 @@ final class WorkoutSession {
     /// Wall-clock elapsed time for this session once completed.
     var duration: TimeInterval
 
-    private var statusRaw: String
+    /// Stored backing for ``status`` — internal so finished sessions are queryable from views (`#Predicate`).
+    var statusRaw: String
 
     var status: WorkoutSessionStatus {
         get {
