@@ -16,6 +16,17 @@ struct WorkoutRootView: View {
                 )
             }
         }
+        .toolbar {
+            ToolbarItem(placement: .topBarTrailing) {
+                NavigationLink {
+                    WorkoutHistoryView()
+                } label: {
+                    Image(systemName: "clock.arrow.circlepath")
+                        .foregroundStyle(Color.P4CE.textDim)
+                        .accessibilityLabel("Workout history")
+                }
+            }
+        }
     }
 }
 
