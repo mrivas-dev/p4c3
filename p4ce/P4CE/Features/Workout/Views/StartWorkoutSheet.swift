@@ -23,6 +23,9 @@ struct StartWorkoutSheet: View {
     @State
     private var customDraft: String = ""
 
+    @State
+    private var showDiscardInProgressAlert = false
+
     private var orderedExerciseNames: [String] {
         var names: [String] = []
         for lift in CoreLift.allCases where selectedCoreLifts.contains(lift) {
@@ -110,6 +113,17 @@ struct StartWorkoutSheet: View {
                 }
             }
             .background(Color.P4CE.bg)
+            .alert("Session in progress", isPresented: $showDiscardInProgressAlert) {
+                Button("Cancel", role: .cancel) {}
+                Button("Discard & start", role: .destructive) {
+                    if let stale = workoutViewModel.fetchInProgressSession() {
+                        workoutViewModel.discardSession(stale)
+                    }
+                    proceedStart()
+                }
+            } message: {
+                Text("Discard your current workout to begin a new one. This session won’t appear in history.")
+            }
         }
     }
 
@@ -168,6 +182,15 @@ struct StartWorkoutSheet: View {
     }
 
     private func confirmStart() {
+        guard canStart else { return }
+        if workoutViewModel.fetchInProgressSession() != nil {
+            showDiscardInProgressAlert = true
+            return
+        }
+        proceedStart()
+    }
+
+    private func proceedStart() {
         guard canStart else { return }
         _ = workoutViewModel.startSession(exercises: orderedExerciseNames)
         dismiss()

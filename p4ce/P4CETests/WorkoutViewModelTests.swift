@@ -26,6 +26,64 @@ final class WorkoutViewModelTests: XCTestCase {
         XCTAssertNil(exercises[1].coreLift)
     }
 
+    func testDiscardSession_setsAbandonedAndClearsActive() throws {
+        let ctx = ModelContext(try P4CESchema.testingContainer())
+        let sut = WorkoutViewModel()
+        sut.attach(modelContext: ctx)
+
+        let session = try XCTUnwrap(sut.startSession(exercises: [CoreLift.benchPress.rawValue]))
+        XCTAssertEqual(session.status, .inProgress)
+
+        sut.discardSession(session)
+
+        XCTAssertEqual(session.status, .abandoned)
+        XCTAssertNil(sut.activeSession)
+
+        let inProgress = try ctx.fetch(
+            FetchDescriptor<WorkoutSession>(predicate: #Predicate { $0.statusRaw == "inProgress" })
+        )
+        XCTAssertTrue(inProgress.isEmpty)
+    }
+
+    func testStartSession_whenInProgressExists_returnsNilWithoutCreatingSecondSession() throws {
+        let ctx = ModelContext(try P4CESchema.testingContainer())
+        let sut = WorkoutViewModel()
+        sut.attach(modelContext: ctx)
+
+        _ = sut.startSession(exercises: [CoreLift.snatch.rawValue])
+        let dup = sut.startSession(exercises: [CoreLift.deadlift.rawValue])
+
+        XCTAssertNil(dup)
+        XCTAssertEqual(try ctx.fetch(FetchDescriptor<WorkoutSession>()).count, 1)
+    }
+
+    func testInProgressSession_survivesNewModelContext() throws {
+        let container = try P4CESchema.testingContainer()
+        let writer = ModelContext(container)
+        let session = WorkoutSession(status: .inProgress)
+        writer.insert(session)
+        try writer.save()
+
+        let reader = ModelContext(container)
+        var descriptor = FetchDescriptor<WorkoutSession>(
+            predicate: #Predicate<WorkoutSession> { $0.statusRaw == "inProgress" },
+            sortBy: [SortDescriptor(\.date, order: .reverse)]
+        )
+        descriptor.fetchLimit = 1
+        let fetched = try reader.fetch(descriptor)
+
+        XCTAssertEqual(fetched.count, 1)
+        XCTAssertEqual(fetched.first?.id, session.id)
+
+        let sut = WorkoutViewModel()
+        sut.attach(modelContext: reader)
+        XCTAssertEqual(sut.fetchInProgressSession()?.id, session.id)
+
+        let resumed = try XCTUnwrap(fetched.first)
+        sut.resumeSession(resumed)
+        XCTAssertEqual(sut.activeSession?.id, session.id)
+    }
+
     func testAddSet_linksToExerciseAndRefreshesObservation() throws {
         let ctx = ModelContext(try P4CESchema.testingContainer())
         let sut = WorkoutViewModel()
