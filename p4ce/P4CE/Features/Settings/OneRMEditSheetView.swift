@@ -15,10 +15,11 @@ struct OneRMEditSheetView: View {
     @State
     private var viewModel: OneRMEditViewModel
 
-    init(profile: AthleteProfile, lift: CoreLift) {
+    init(profile: AthleteProfile, lift: CoreLift, modelContext: ModelContext) {
         self.profile = profile
         self.lift = lift
-        let kg = profile.liftMaxes.first(where: { $0.lift == lift })?.oneRepMaxKg
+        let settingsVM = SettingsViewModel()
+        let kg = settingsVM.workingOneRepMaxKg(for: lift, profile: profile, context: modelContext)
         _viewModel = State(
             wrappedValue: OneRMEditViewModel(
                 lift: lift,

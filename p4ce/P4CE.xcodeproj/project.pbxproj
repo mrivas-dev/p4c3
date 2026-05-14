@@ -14,9 +14,11 @@
 		163704B73EFB1198A4DA4722 /* WorkoutSessionMetricsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CE4D4437747160F191C4CCE /* WorkoutSessionMetricsTests.swift */; };
 		2518D1173193A17A2A592EFE /* WorkoutLoggingModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23100EA3224D421FB3BCC5F1 /* WorkoutLoggingModelTests.swift */; };
 		2B2EC3F0A0D3F838F88CAA38 /* WorkoutSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B6A903C35986A8C0E07B2F3 /* WorkoutSession.swift */; };
+		31E7D0A60FB3200FB4D28400 /* OneRMCalculatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD18E464883CE09A1DCB1C40 /* OneRMCalculatorTests.swift */; };
 		3A5DF0EFF933B71951BC30F1 /* WorkoutHistoryGroupingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 874CDCEDCD063D69BD6BBB4F /* WorkoutHistoryGroupingTests.swift */; };
 		449CE4969A9BC366235F3328 /* ServicesPlaceholder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F8C309332F2EE1F73948012 /* ServicesPlaceholder.swift */; };
 		49AEF529E702CF8C939BED83 /* P4CESchema.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A41DE1FC9A991263F236A91 /* P4CESchema.swift */; };
+		4FEE56EA1F489763E2BB0FE9 /* OneRMCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41BD1C2251CAC157DBF4E875 /* OneRMCalculator.swift */; };
 		502BF282D509A3CB1F03BAE8 /* Antonio-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 484A1325265CF42A9FFF3824 /* Antonio-Regular.ttf */; };
 		531083BFEDA6991C17706EDD /* Geist-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E8CA20395CB41DFEC7BCBE9D /* Geist-Regular.ttf */; };
 		54D39A3B1A1BBC7D982C2972 /* RestTimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D807282CBE7E84D715D0E985 /* RestTimerView.swift */; };
@@ -44,6 +46,7 @@
 		BF13C0226AE8444AC556BD25 /* JetBrainsMono-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 894716921936B47AAFA60333 /* JetBrainsMono-Regular.ttf */; };
 		C58723F1353F0FB1BDFFE62F /* SwitchToDashboardTabEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EDACCD2E82A5F46ED1BC994 /* SwitchToDashboardTabEnvironment.swift */; };
 		C70C4870207DAE4B63DA802A /* WorkoutHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9CDF3FFFDF628E5067D3FF3 /* WorkoutHistoryView.swift */; };
+		C79B79B00E2EA1678C3575DD /* LiftOneRM.swift in Sources */ = {isa = PBXBuildFile; fileRef = B70A01A7A9956F168726FFEE /* LiftOneRM.swift */; };
 		CE806F6E3FC7F0418F8FD799 /* OnboardingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F83126EC4F2BDB1BFEECC5B /* OnboardingViewModel.swift */; };
 		CF044B2E9EF4D8868B172252 /* SetEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 701BA67376BFE01CD4B73484 /* SetEntry.swift */; };
 		D4195068D3808C5B58556DA2 /* AnalyticsRootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9179B52D51E1FD729EBD3F8A /* AnalyticsRootView.swift */; };
@@ -92,6 +95,7 @@
 		3CE4D4437747160F191C4CCE /* WorkoutSessionMetricsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutSessionMetricsTests.swift; sourceTree = "<group>"; };
 		3EDACCD2E82A5F46ED1BC994 /* SwitchToDashboardTabEnvironment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwitchToDashboardTabEnvironment.swift; sourceTree = "<group>"; };
 		4081F1052CC7D3C55D2EAD72 /* SectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionHeader.swift; sourceTree = "<group>"; };
+		41BD1C2251CAC157DBF4E875 /* OneRMCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OneRMCalculator.swift; sourceTree = "<group>"; };
 		484A1325265CF42A9FFF3824 /* Antonio-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Antonio-Regular.ttf"; sourceTree = "<group>"; };
 		4A41DE1FC9A991263F236A91 /* P4CESchema.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = P4CESchema.swift; sourceTree = "<group>"; };
 		50072F66EAFEE0FA0558AF3E /* P4CEApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = P4CEApp.swift; sourceTree = "<group>"; };
@@ -116,6 +120,7 @@
 		A92E4B7E071EEE4716D53B9D /* CoreLift.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreLift.swift; sourceTree = "<group>"; };
 		A9886973AEAE20A7B53F26CC /* WorkoutViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutViewModel.swift; sourceTree = "<group>"; };
 		B069B3F239D7476F7E74BCE3 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		B70A01A7A9956F168726FFEE /* LiftOneRM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiftOneRM.swift; sourceTree = "<group>"; };
 		B9CDF3FFFDF628E5067D3FF3 /* WorkoutHistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutHistoryView.swift; sourceTree = "<group>"; };
 		BF5F6DD39C344BF795A02DC1 /* DashboardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardViewModel.swift; sourceTree = "<group>"; };
 		BF92805341E17EE0D0959157 /* OnboardingSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingSheetView.swift; sourceTree = "<group>"; };
@@ -129,12 +134,14 @@
 		E1DA440C3E5C626F500A3B80 /* OneRMEditSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OneRMEditSheetView.swift; sourceTree = "<group>"; };
 		E8CA20395CB41DFEC7BCBE9D /* Geist-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Geist-Regular.ttf"; sourceTree = "<group>"; };
 		F4923300B9F3CA2165D266AF /* WorkoutExercise.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutExercise.swift; sourceTree = "<group>"; };
+		FD18E464883CE09A1DCB1C40 /* OneRMCalculatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OneRMCalculatorTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
 		0FD75455B0C11EB33776CD1A /* Algorithms */ = {
 			isa = PBXGroup;
 			children = (
+				41BD1C2251CAC157DBF4E875 /* OneRMCalculator.swift */,
 				CDA0E17ED55F7767F37D37AE /* UnitConversion.swift */,
 			);
 			path = Algorithms;
@@ -191,6 +198,7 @@
 				772C12A92BCBFCE58EEDCB30 /* AthleteProfile.swift */,
 				A92E4B7E071EEE4716D53B9D /* CoreLift.swift */,
 				79A10A5F38B8A153B7A4A67A /* LiftMax.swift */,
+				B70A01A7A9956F168726FFEE /* LiftOneRM.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -249,6 +257,7 @@
 			isa = PBXGroup;
 			children = (
 				D25969F9BE3507DF370C2810 /* AthleteProfileTests.swift */,
+				FD18E464883CE09A1DCB1C40 /* OneRMCalculatorTests.swift */,
 				874CDCEDCD063D69BD6BBB4F /* WorkoutHistoryGroupingTests.swift */,
 				23100EA3224D421FB3BCC5F1 /* WorkoutLoggingModelTests.swift */,
 				3CE4D4437747160F191C4CCE /* WorkoutSessionMetricsTests.swift */,
@@ -471,6 +480,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				55F9117C9492B27572CB1CD0 /* AthleteProfileTests.swift in Sources */,
+				31E7D0A60FB3200FB4D28400 /* OneRMCalculatorTests.swift in Sources */,
 				3A5DF0EFF933B71951BC30F1 /* WorkoutHistoryGroupingTests.swift in Sources */,
 				2518D1173193A17A2A592EFE /* WorkoutLoggingModelTests.swift in Sources */,
 				163704B73EFB1198A4DA4722 /* WorkoutSessionMetricsTests.swift in Sources */,
@@ -493,11 +503,13 @@
 				87930134CBCE223336E86B0A /* FeatureTabPlaceholder.swift in Sources */,
 				AA1FD228B933E37D532A43D6 /* FinishWorkoutSheet.swift in Sources */,
 				ED29DB0160D1727C7E22407F /* LiftMax.swift in Sources */,
+				C79B79B00E2EA1678C3575DD /* LiftOneRM.swift in Sources */,
 				8DCC3C574C71B70CFFC678DE /* LogSetSheet.swift in Sources */,
 				90E2CDFD114E039CB8B37261 /* MainTabView.swift in Sources */,
 				0A2F6F25DF3D5B611DBA6CDE /* MetricCard.swift in Sources */,
 				63D3E5E28A07EA4C7068FFE1 /* OnboardingSheetView.swift in Sources */,
 				CE806F6E3FC7F0418F8FD799 /* OnboardingViewModel.swift in Sources */,
+				4FEE56EA1F489763E2BB0FE9 /* OneRMCalculator.swift in Sources */,
 				D847A7A24C7D51EFCA8CD2EB /* OneRMEditSheetView.swift in Sources */,
 				E338E0C27AD1E74DAB8EA84D /* OneRMEditViewModel.swift in Sources */,
 				DAB58D7B28DF0CA48B383B1A /* P4CEApp.swift in Sources */,

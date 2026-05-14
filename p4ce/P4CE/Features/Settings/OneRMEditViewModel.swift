@@ -75,6 +75,7 @@ final class OneRMEditViewModel {
             if let existing = profile.liftMaxes.first(where: { $0.lift == lift }) {
                 context.delete(existing)
             }
+            try LiftOneRM.syncTested(liftName: lift.rawValue, testedKg: nil, context: context)
             profile.touchUpdated()
             try context.save()
             return
@@ -87,6 +88,7 @@ final class OneRMEditViewModel {
             let lm = LiftMax(lift: lift, oneRepMaxKg: oneRepMaxKg, profile: profile)
             context.insert(lm)
         }
+        try LiftOneRM.syncTested(liftName: lift.rawValue, testedKg: oneRepMaxKg, context: context)
         profile.touchUpdated()
         try context.save()
     }

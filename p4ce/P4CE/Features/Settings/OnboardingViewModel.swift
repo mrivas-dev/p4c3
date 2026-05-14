@@ -137,6 +137,7 @@ final class OnboardingViewModel {
             let lm = LiftMax(lift: lift, oneRepMaxKg: kg, profile: profile)
             modelContext.insert(lm)
         }
+        try? LiftOneRM.syncTested(liftName: lift.rawValue, testedKg: kg, context: modelContext)
     }
 
     private func clampFrequency(_ v: Int) -> Int {
