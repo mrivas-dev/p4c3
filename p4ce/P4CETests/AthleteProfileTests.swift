@@ -40,10 +40,7 @@ final class UnitConversionTests: XCTestCase {
 @MainActor
 final class OnboardingViewModelTests: XCTestCase {
     func testTrainingStepGateAllowsThreeToSix() throws {
-        let cfg = ModelConfiguration(isStoredInMemoryOnly: true)
-        let ctx = ModelContext(
-            try ModelContainer(for: AthleteProfile.self, LiftMax.self, configurations: cfg)
-        )
+        let ctx = ModelContext(try P4CESchema.testingContainer())
         let profile = AthleteProfile()
         ctx.insert(profile)
         try ctx.save()
@@ -61,10 +58,7 @@ final class OnboardingViewModelTests: XCTestCase {
     }
 
     func testSkipLeavesLiftMaxUnset() throws {
-        let cfg = ModelConfiguration(isStoredInMemoryOnly: true)
-        let ctx = ModelContext(
-            try ModelContainer(for: AthleteProfile.self, LiftMax.self, configurations: cfg)
-        )
+        let ctx = ModelContext(try P4CESchema.testingContainer())
         let profile = AthleteProfile()
         ctx.insert(profile)
         try ctx.save()
@@ -77,10 +71,7 @@ final class OnboardingViewModelTests: XCTestCase {
     }
 
     func testLetsGoUpsertsSquat() throws {
-        let cfg = ModelConfiguration(isStoredInMemoryOnly: true)
-        let ctx = ModelContext(
-            try ModelContainer(for: AthleteProfile.self, LiftMax.self, configurations: cfg)
-        )
+        let ctx = ModelContext(try P4CESchema.testingContainer())
         let profile = AthleteProfile()
         ctx.insert(profile)
         try ctx.save()

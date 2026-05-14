@@ -121,10 +121,5 @@ private struct DashboardMetricTile: View {
         DashboardView()
     }
     .preferredColorScheme(.dark)
-    .modelContainer(
-        try! ModelContainer(
-            for: AthleteProfile.self, LiftMax.self,
-            configurations: ModelConfiguration(isStoredInMemoryOnly: true)
-        )
-    )
+    .modelContainer(try! P4CESchema.previewContainer())
 }
