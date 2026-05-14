@@ -4,7 +4,7 @@ import SwiftUI
 @main
 struct P4CEApp: App {
     private static func makeContainer() -> ModelContainer {
-        let schema = Schema([AthleteProfile.self, LiftMax.self])
+        let schema = P4CESchema.makeSchema()
         let configuration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
         do {
             return try ModelContainer(for: schema, configurations: [configuration])

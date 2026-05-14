@@ -52,10 +52,5 @@ struct ContentView: View {
 #Preview("ContentView") {
     ContentView()
         .preferredColorScheme(.dark)
-        .modelContainer(
-            try! ModelContainer(
-                for: AthleteProfile.self, LiftMax.self,
-                configurations: ModelConfiguration(isStoredInMemoryOnly: true)
-            )
-        )
+        .modelContainer(try! P4CESchema.previewContainer())
 }
