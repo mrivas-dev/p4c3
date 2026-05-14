@@ -4,6 +4,8 @@ import SwiftUI
 /// Home / Dashboard — layout aligned with `_design/wireframes/P4CE-4-dashboard-wireframe.html`.
 struct DashboardView: View {
     private let viewModel: DashboardViewModel
+
+    /// Switches MainTabView to the Workout tab (used by Today's card).
     private let onGoToWorkout: () -> Void
 
     init(
@@ -13,6 +15,12 @@ struct DashboardView: View {
         self.viewModel = viewModel
         self.onGoToWorkout = onGoToWorkout
     }
+
+    @EnvironmentObject
+    private var workoutViewModel: WorkoutViewModel
+
+    @State
+    private var showStartWorkoutSheet = false
 
     var body: some View {
         NavigationStack {
@@ -57,9 +65,11 @@ struct DashboardView: View {
                     .padding(.bottom, AppSpacing.space4.value)
                 }
 
-                PrimaryButton(title: "START WORKOUT", action: startWorkoutTapped)
-                    .padding(.horizontal, AppSpacing.space4.value)
-                    .padding(.bottom, AppSpacing.space4.value)
+                PrimaryButton(title: "START WORKOUT") {
+                    showStartWorkoutSheet = true
+                }
+                .padding(.horizontal, AppSpacing.space4.value)
+                .padding(.bottom, AppSpacing.space4.value)
             }
             .background(Color.P4CE.bg.ignoresSafeArea())
             .navigationTitle("Home")
@@ -77,11 +87,16 @@ struct DashboardView: View {
                     }
                 }
             }
+            .sheet(isPresented: $showStartWorkoutSheet) {
+                StartWorkoutSheet {
+                    showStartWorkoutSheet = false
+                    onGoToWorkout()
+                }
+                .environmentObject(workoutViewModel)
+                .presentationDragIndicator(.visible)
+                .presentationDetents([.medium, .large])
+            }
         }
-    }
-
-    private func startWorkoutTapped() {
-        onGoToWorkout()
     }
 }
 
@@ -116,10 +131,26 @@ private struct DashboardMetricTile: View {
     }
 }
 
-#Preview("DashboardView") {
-    NavigationStack {
-        DashboardView()
+private struct DashboardViewPreviewHarness: View {
+    @Environment(\.modelContext)
+    private var modelContext
+
+    @StateObject
+    private var workoutViewModel = WorkoutViewModel()
+
+    var body: some View {
+        NavigationStack {
+            DashboardView()
+                .environmentObject(workoutViewModel)
+        }
+        .task {
+            workoutViewModel.attach(modelContext: modelContext)
+        }
+        .preferredColorScheme(.dark)
     }
-    .preferredColorScheme(.dark)
-    .modelContainer(try! P4CESchema.previewContainer())
+}
+
+#Preview("DashboardView") {
+    DashboardViewPreviewHarness()
+        .modelContainer(try! P4CESchema.previewContainer())
 }
