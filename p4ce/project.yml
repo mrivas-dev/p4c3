@@ -42,8 +42,27 @@ targets:
         Debug:
           SWIFT_ACTIVE_COMPILATION_CONDITIONS: DEBUG
 
+  P4CETests:
+    type: bundle.unit-test
+    platform: iOS
+    sources:
+      - path: P4CETests
+    dependencies:
+      - target: P4CE
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.p4ce.app.tests
+        CURRENT_PROJECT_VERSION: 1
+        MARKETING_VERSION: "1.0"
+        GENERATE_INFOPLIST_FILE: YES
+        TEST_HOST: "$(BUILT_PRODUCTS_DIR)/P4CE.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/P4CE"
+        BUNDLE_LOADER: "$(TEST_HOST)"
+
 schemes:
   P4CE:
     build:
       targets:
         P4CE: all
+    test:
+      targets:
+        - name: P4CETests

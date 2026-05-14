@@ -1,3 +1,4 @@
+import SwiftData
 import SwiftUI
 
 /// Home / Dashboard — layout aligned with `_design/wireframes/P4CE-4-dashboard-wireframe.html`.
@@ -68,7 +69,7 @@ struct DashboardView: View {
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
                     NavigationLink {
-                        SettingsRootView()
+                        SettingsView()
                     } label: {
                         Image(systemName: "gearshape.fill")
                             .foregroundStyle(Color.P4CE.textDim)
@@ -116,6 +117,14 @@ private struct DashboardMetricTile: View {
 }
 
 #Preview("DashboardView") {
-    DashboardView()
-        .preferredColorScheme(.dark)
+    NavigationStack {
+        DashboardView()
+    }
+    .preferredColorScheme(.dark)
+    .modelContainer(
+        try! ModelContainer(
+            for: AthleteProfile.self, LiftMax.self,
+            configurations: ModelConfiguration(isStoredInMemoryOnly: true)
+        )
+    )
 }
