@@ -15,6 +15,13 @@ struct DashboardView: View {
     )
     private var finishedSessionsNewestFirst: [WorkoutSession]
 
+    @Query(
+        filter: #Predicate<WorkoutSession> { $0.statusRaw == "inProgress" },
+        sort: \WorkoutSession.date,
+        order: .reverse
+    )
+    private var inProgressSessionsNewestFirst: [WorkoutSession]
+
     init(
         viewModel: DashboardViewModel = DashboardViewModel(),
         onGoToWorkout: @escaping () -> Void = {}
@@ -28,6 +35,13 @@ struct DashboardView: View {
 
     @State
     private var showStartWorkoutSheet = false
+
+    @State
+    private var bannerDiscardSession: WorkoutSession?
+
+    private var inProgressSession: WorkoutSession? {
+        inProgressSessionsNewestFirst.first
+    }
 
     private var lastSessionMetricLine: String {
         guard let session = finishedSessionsNewestFirst.first else {
@@ -43,6 +57,21 @@ struct DashboardView: View {
     var body: some View {
         NavigationStack {
             VStack(spacing: 0) {
+                if let session = inProgressSession {
+                    ResumeBanner(
+                        onResume: {
+                            workoutViewModel.resumeSession(session)
+                            onGoToWorkout()
+                        },
+                        onDiscardTapped: {
+                            bannerDiscardSession = session
+                        }
+                    )
+                    .padding(.horizontal, AppSpacing.space4.value)
+                    .padding(.top, AppSpacing.space2.value)
+                    .padding(.bottom, AppSpacing.space1.value)
+                }
+
                 ScrollView {
                     VStack(alignment: .leading, spacing: AppSpacing.space6.value) {
                         Button(action: onGoToWorkout) {
@@ -123,6 +152,25 @@ struct DashboardView: View {
                 .environmentObject(workoutViewModel)
                 .presentationDragIndicator(.visible)
                 .presentationDetents([.medium, .large])
+            }
+            .alert(
+                "Discard session?",
+                isPresented: Binding(
+                    get: { bannerDiscardSession != nil },
+                    set: { if !$0 { bannerDiscardSession = nil } }
+                )
+            ) {
+                Button("Cancel", role: .cancel) {
+                    bannerDiscardSession = nil
+                }
+                Button("Discard", role: .destructive) {
+                    if let session = bannerDiscardSession {
+                        workoutViewModel.discardSession(session)
+                    }
+                    bannerDiscardSession = nil
+                }
+            } message: {
+                Text("This marks the workout abandoned. Logged sets for this session will not appear in history.")
             }
         }
     }
