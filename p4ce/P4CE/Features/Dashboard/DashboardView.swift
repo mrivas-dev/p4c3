@@ -8,6 +8,13 @@ struct DashboardView: View {
     /// Switches MainTabView to the Workout tab (used by Today's card).
     private let onGoToWorkout: () -> Void
 
+    @Query(
+        filter: #Predicate<WorkoutSession> { $0.statusRaw == "finished" },
+        sort: \WorkoutSession.date,
+        order: .reverse
+    )
+    private var finishedSessionsNewestFirst: [WorkoutSession]
+
     init(
         viewModel: DashboardViewModel = DashboardViewModel(),
         onGoToWorkout: @escaping () -> Void = {}
@@ -21,6 +28,17 @@ struct DashboardView: View {
 
     @State
     private var showStartWorkoutSheet = false
+
+    private var lastSessionMetricLine: String {
+        guard let session = finishedSessionsNewestFirst.first else {
+            return "—"
+        }
+        let weekday = session.date.formatted(.dateTime.weekday(.abbreviated))
+        let volumeKg = WorkoutSessionMetrics.totalVolume(for: session)
+        let tonnes = volumeKg / 1000
+        let volLabel = String(format: "%.1f", tonnes) + "t"
+        return "\(weekday) · Vol \(volLabel)"
+    }
 
     var body: some View {
         NavigationStack {
@@ -45,7 +63,7 @@ struct DashboardView: View {
                                     ) {
                                         DashboardMetricTile(
                                             label: viewModel.lastSessionLabel,
-                                            value: viewModel.lastSessionValue
+                                            value: lastSessionMetricLine
                                         )
                                         DashboardMetricTile(
                                             label: viewModel.weeklyVolumeLabel,

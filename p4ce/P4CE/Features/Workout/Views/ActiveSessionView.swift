@@ -36,6 +36,9 @@ struct ActiveSessionView: View {
     @State
     private var restDeadline: Date?
 
+    @State
+    private var showFinishWorkoutSheet = false
+
     /// Default coach rest cue after logging a heavy set — aligned with sprint wireframe (~90 s).
     private let restDurationSeconds = 90
 
@@ -91,6 +94,12 @@ struct ActiveSessionView: View {
             .environmentObject(workoutViewModel)
             .presentationDetents([.large])
         }
+        .sheet(isPresented: $showFinishWorkoutSheet) {
+            FinishWorkoutSheet(session: session, currentElapsed: { displayedElapsed })
+                .environmentObject(workoutViewModel)
+                .presentationDragIndicator(.visible)
+                .presentationDetents([.medium, .large])
+        }
         .onAppear {
             if foregroundAnchor == nil {
                 foregroundAnchor = session.date
@@ -138,7 +147,7 @@ struct ActiveSessionView: View {
             Spacer(minLength: 0)
 
             Button {
-                workoutViewModel.finishSession(session, elapsed: displayedElapsed)
+                showFinishWorkoutSheet = true
             } label: {
                 Text("Finish")
                     .font(Font.appSans(size: 15, weight: .semibold))
@@ -153,7 +162,7 @@ struct ActiveSessionView: View {
                     )
             }
             .buttonStyle(.plain)
-            .accessibilityHint("End this workout and save elapsed time")
+            .accessibilityHint("Review summary and save or keep training")
         }
         .padding(AppSpacing.space4.value)
         .background(Color.P4CE.surfHi.opacity(0.45))

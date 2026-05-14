@@ -57,6 +57,11 @@ struct MainTabView: View {
             .tag(MainTab.analytics)
         }
         .tint(Color.P4CE.lime)
+        .environment(\.switchToDashboardTab) {
+            Task { @MainActor in
+                selectedTab = .dashboard
+            }
+        }
     }
 }
 
