@@ -32,6 +32,12 @@ enum AppLayout {
     /// Primary CTA height — DESIGN.md Touch Targets / Log Set button.
     static let primaryCTAHeight: CGFloat = 56
 
+    /// 1RM edit sheet stepper taps — P4CE-9 (minimum 44pt; spec 48×48).
+    static let stepperButtonSide: CGFloat = 48
+
+    /// Minimum touch target guidance (toolbar / tertiary controls).
+    static let minimumTouchTarget: CGFloat = 44
+
     /// 1 pt separators / card strokes (METRIC CARD pattern).
     static let hairlineBorderWidth: CGFloat = 1
 }
