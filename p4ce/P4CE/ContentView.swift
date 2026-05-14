@@ -12,9 +12,14 @@ struct ContentView: View {
     @State
     private var showOnboarding = false
 
+    @StateObject
+    private var workoutViewModel = WorkoutViewModel()
+
     var body: some View {
         MainTabView()
+            .environmentObject(workoutViewModel)
             .task {
+                workoutViewModel.attach(modelContext: modelContext)
                 try? AthleteProfile.fetchOrInsertSingleton(in: modelContext)
                 refreshOnboardingPresentation()
             }

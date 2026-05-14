@@ -1,3 +1,4 @@
+import SwiftData
 import SwiftUI
 
 enum MainTab: Hashable {
@@ -61,5 +62,7 @@ struct MainTabView: View {
 
 #Preview("MainTabView") {
     MainTabView()
+        .environmentObject(WorkoutViewModel())
+        .modelContainer(try! P4CESchema.previewContainer())
         .preferredColorScheme(.dark)
 }
