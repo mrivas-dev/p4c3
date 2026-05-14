@@ -41,7 +41,7 @@ struct SettingsView: View {
         .preferredColorScheme(.dark)
         .sheet(item: $liftEditing) { route in
             if let profile = athleteProfiles.first {
-                OneRMEditSheetView(profile: profile, lift: route.lift)
+                OneRMEditSheetView(profile: profile, lift: route.lift, modelContext: modelContext)
                     .presentationDetents([.large])
                     .preferredColorScheme(.dark)
             }
@@ -257,7 +257,7 @@ private struct SettingsContent: View {
                         .font(Font.Style.sessionName)
                         .foregroundStyle(Color.P4CE.textDim)
                     Spacer()
-                    if let kg = viewModel.oneRepMaxKg(for: lift, profile: profile) {
+                    if let kg = viewModel.workingOneRepMaxKg(for: lift, profile: profile, context: modelContext) {
                         Text(UnitConversion.formatLiftDisplay(forKg: kg, unit: profile.unitPreference))
                             .font(Font.appMono(size: 12, weight: .medium).monospacedDigit())
                             .foregroundStyle(Color.P4CE.dim)

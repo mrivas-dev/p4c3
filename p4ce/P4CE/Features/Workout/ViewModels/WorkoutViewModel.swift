@@ -97,6 +97,12 @@ final class WorkoutViewModel: ObservableObject {
         modelContext.insert(entry)
 
         do {
+            try LiftOneRM.applyEstimatedFromSet(
+                liftName: exercise.name,
+                weight: weight,
+                reps: reps,
+                context: modelContext
+            )
             try modelContext.save()
         } catch {
             assertionFailure("Failed to save set: \(error)")

@@ -5,6 +5,7 @@ enum P4CESchema {
         Schema([
             AthleteProfile.self,
             LiftMax.self,
+            LiftOneRM.self,
             WorkoutSession.self,
             WorkoutExercise.self,
             SetEntry.self,

@@ -101,6 +101,27 @@ final class WorkoutViewModelTests: XCTestCase {
         XCTAssertEqual(exercise.sets.first?.reps, 5)
         XCTAssertEqual(exercise.sets.first?.rpe, 7.5)
         XCTAssertEqual(try ctx.fetch(FetchDescriptor<SetEntry>()).count, 1)
+
+        let liftKey = CoreLift.deadlift.rawValue
+        var oneRMDescriptor = FetchDescriptor<LiftOneRM>(predicate: #Predicate { $0.liftName == liftKey })
+        oneRMDescriptor.fetchLimit = 1
+        let oneRMRow = try XCTUnwrap(try ctx.fetch(oneRMDescriptor).first)
+        let expected = OneRMCalculator.epley(weight: 180, reps: 5)
+        let estimated = try XCTUnwrap(oneRMRow.estimatedRM)
+        XCTAssertEqual(estimated, expected, accuracy: 0.01)
+    }
+
+    func testAddSet_repsAboveTen_doesNotUpdateEstimatedOneRM() throws {
+        let ctx = ModelContext(try P4CESchema.testingContainer())
+        let sut = WorkoutViewModel()
+        sut.attach(modelContext: ctx)
+
+        let session = try XCTUnwrap(sut.startSession(exercises: [CoreLift.benchPress.rawValue]))
+        let exercise = try XCTUnwrap(session.exercises.first)
+
+        sut.addSet(to: exercise, weight: 100, reps: 11, rpe: nil)
+
+        XCTAssertEqual(try ctx.fetch(FetchDescriptor<LiftOneRM>()).count, 0)
     }
 
     func testFinishSession_persistsDurationStatusAndClearsActive() throws {
