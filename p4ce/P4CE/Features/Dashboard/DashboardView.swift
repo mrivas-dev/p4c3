@@ -96,12 +96,22 @@ struct DashboardView: View {
             .toolbarColorScheme(.dark, for: .navigationBar)
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
-                    NavigationLink {
-                        SettingsView()
-                    } label: {
-                        Image(systemName: "gearshape.fill")
-                            .foregroundStyle(Color.P4CE.textDim)
-                            .accessibilityLabel("Settings")
+                    HStack(spacing: AppSpacing.space3.value) {
+                        NavigationLink {
+                            WorkoutHistoryView()
+                        } label: {
+                            Image(systemName: "clock.arrow.circlepath")
+                                .foregroundStyle(Color.P4CE.textDim)
+                                .accessibilityLabel("Workout history")
+                        }
+
+                        NavigationLink {
+                            SettingsView()
+                        } label: {
+                            Image(systemName: "gearshape.fill")
+                                .foregroundStyle(Color.P4CE.textDim)
+                                .accessibilityLabel("Settings")
+                        }
                     }
                 }
             }
