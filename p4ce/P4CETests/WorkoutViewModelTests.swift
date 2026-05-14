@@ -44,4 +44,17 @@ final class WorkoutViewModelTests: XCTestCase {
         XCTAssertEqual(exercise.sets.first?.rpe, 7.5)
         XCTAssertEqual(try ctx.fetch(FetchDescriptor<SetEntry>()).count, 1)
     }
+
+    func testFinishSession_persistsDurationStatusAndClearsActive() throws {
+        let ctx = ModelContext(try P4CESchema.testingContainer())
+        let sut = WorkoutViewModel()
+        sut.attach(modelContext: ctx)
+
+        let session = try XCTUnwrap(sut.startSession(exercises: [CoreLift.benchPress.rawValue]))
+        sut.finishSession(session, elapsed: 1234)
+
+        XCTAssertEqual(session.duration, 1234, accuracy: 0.001)
+        XCTAssertEqual(session.status, .finished)
+        XCTAssertNil(sut.activeSession)
+    }
 }

@@ -63,6 +63,29 @@ final class WorkoutViewModel: ObservableObject {
         objectWillChange.send()
     }
 
+    /// Writes elapsed time, marks the session finished, and clears ``activeSession``.
+    func finishSession(_ session: WorkoutSession, elapsed: TimeInterval) {
+        guard let modelContext else {
+            assertionFailure("WorkoutViewModel.attach(modelContext:) before finishSession")
+            return
+        }
+        guard session.status != .finished else { return }
+
+        session.duration = elapsed
+        session.status = .finished
+
+        do {
+            try modelContext.save()
+        } catch {
+            assertionFailure("Failed to finish workout session: \(error)")
+        }
+
+        if activeSession?.id == session.id {
+            activeSession = nil
+        }
+        objectWillChange.send()
+    }
+
     /// Clears the in-memory active session pointer (persisted record is unchanged).
     func clearActiveSession() {
         activeSession = nil
