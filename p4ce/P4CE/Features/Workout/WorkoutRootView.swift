@@ -27,30 +27,30 @@ struct WorkoutRootView: View {
     .preferredColorScheme(.dark)
 }
 
-#Preview("WorkoutRootView — active") {
-    struct Harness: View {
-        @Environment(\.modelContext)
-        private var modelContext
+private struct WorkoutRootActivePreviewHarness: View {
+    @Environment(\.modelContext)
+    private var modelContext
 
-        @StateObject
-        private var workoutViewModel = WorkoutViewModel()
+    @StateObject
+    private var workoutViewModel = WorkoutViewModel()
 
-        var body: some View {
-            NavigationStack {
-                WorkoutRootView()
-                    .environmentObject(workoutViewModel)
-            }
-            .task {
-                workoutViewModel.attach(modelContext: modelContext)
-                _ = workoutViewModel.startSession(exercises: [
-                    CoreLift.backSquat.rawValue,
-                    "Row"
-                ])
-            }
-            .preferredColorScheme(.dark)
+    var body: some View {
+        NavigationStack {
+            WorkoutRootView()
+                .environmentObject(workoutViewModel)
         }
+        .task {
+            workoutViewModel.attach(modelContext: modelContext)
+            _ = workoutViewModel.startSession(exercises: [
+                CoreLift.backSquat.rawValue,
+                "Row"
+            ])
+        }
+        .preferredColorScheme(.dark)
     }
+}
 
-    return Harness()
+#Preview("WorkoutRootView — active") {
+    WorkoutRootActivePreviewHarness()
         .modelContainer(try! P4CESchema.previewContainer())
 }
